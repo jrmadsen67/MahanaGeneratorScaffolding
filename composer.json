@@ -1,0 +1,34 @@
+{
+    "name": "jrmadsen67/MahanaScaffolding",
+    "type": "library",
+    "description": "Generator Scaffolding for Laravel",
+    "keywords": ["laravel", "generator", "scaffolding"],
+    "homepage": "https://github.com/jrmadsen67/MahanaScaffolding",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeff Madsen",
+            "email": "jrmadsen67@gmail.com",
+            "homepage": "https://github.com/jrmadsen67",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "illuminate/support": "~5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "phpspec/phpspec": "~2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "jrmadsen67\\MahanaScaffolding\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "jrmadsen67\\MahanaScaffolding\\Test\\": "tests/"
+        }
+    }
+}
