@@ -1,5 +1,5 @@
 {
-    "name": "jrmadsen67/MahanaGeneratorScaffolding",
+    "name": "jrmadsen67/mahana-generator-scaffolding",
     "type": "library",
     "description": "Generator Scaffolding for Laravel",
     "keywords": ["laravel", "generator", "scaffolding"],
