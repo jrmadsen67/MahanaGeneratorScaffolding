@@ -117,6 +117,14 @@ class MahanaScaffolding
             $args = array_filter($args);
 
             \Artisan::call('mahana:model', $args);
+
+            // Migrations -
+            // TODO: add a flag to include or no
+            // TODO: allow turning off increments, timestamps
+            $migration['name'] = 'create_' . strtolower($args['name']) . '_table';
+            $migration['--schema'] = $modelParser->getFields();
+            \Artisan::call('make:migration:schema', $migration);
+
         }
     }
 
@@ -140,10 +148,10 @@ class MahanaScaffolding
         }
     }
 
-    public function generateMigrations()
-    {
-        # code...
-    }
+//    public function generateMigrations()
+//    {
+//        # code...
+//    }
 
 
     public function setCommandsArray()

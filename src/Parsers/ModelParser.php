@@ -14,6 +14,8 @@ class ModelParser extends BaseParser
 {
     public $tableName;
 
+    public $fields;
+
     public $primaryKey;
 
     public $fillable;
@@ -71,6 +73,15 @@ class ModelParser extends BaseParser
         $this->dates[] = $item;
     }
 
+    function getFields(){
+        if (empty($this->fields)){
+            return '';
+        }
+
+        // NOTE: the space between fields is required for Jeffrey Way gnerators
+        return implode(', ', $this->fields);
+    }
+
     public function parseFields($items)
     {
         (new Collection($items))->each(function($field, $key){
@@ -81,6 +92,26 @@ class ModelParser extends BaseParser
             if (!empty($field['dates'])){
                 $this->setDates($key);
             }
+
+            $this->fields[$key] = $this->buildFieldString($key, $field);
         });
+    }
+
+    // Example return:
+    // email:string:unique(:nullable)
+    public function buildFieldString($key, $field){
+
+        $build[] = $key;
+        $build[] = $field['type'];
+
+        if (!empty($field['unique'])){
+            $build[] = 'unique';
+        }
+
+        if (!empty($field['nullable'])){
+            $build[] = 'nullable';
+        }
+
+        return implode(':', $build);
     }
 }
