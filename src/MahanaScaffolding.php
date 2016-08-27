@@ -119,12 +119,14 @@ class MahanaScaffolding
             \Artisan::call('mahana:model', $args);
 
             // Migrations -
-            // TODO: add a flag to include or no
             // TODO: allow turning off increments, timestamps
-            $migration['name'] = 'create_' . strtolower($args['name']) . '_table';
-            $migration['--schema'] = $modelParser->getFields();
-            $migration['--model'] = false;
-            \Artisan::call('make:migration:schema', $migration);
+            if ($modelParser->includeMigration()){
+                $migration['name'] = 'create_' . strtolower($args['name']) . '_table';
+                $migration['--schema'] = $modelParser->getFields();
+                $migration['--model'] = false;
+                \Artisan::call('make:migration:schema', $migration);
+            }
+
 
         }
     }

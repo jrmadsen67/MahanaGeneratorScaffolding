@@ -33,6 +33,10 @@ class ModelParser extends BaseParser
 
     }
 
+    function includeMigration(){
+        return $this->itemArray->get('migration', false);
+    }
+
     function getTableName(){
         return $this->tableName;
     }
