@@ -1,0 +1,35 @@
+models:
+    Book:
+        name: Book
+        table: books
+        primary_key: book_id
+        fields:
+            book_id:
+              type: increment
+            title:
+              type: string
+              fillable: true
+              unique: true
+            url:
+              type: string
+              fillable: true
+              nullable: true
+            created_at:
+              type: date
+              dates : true
+    Author:
+        name: Author
+        table: authors
+        fields:
+            title:
+              type: string
+              fillable: false
+            url:
+              type: string
+              fillable: true
+              nullable: true
+controllers:
+    Book:
+        name: Book
+    Author:
+        name: Author
