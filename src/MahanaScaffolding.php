@@ -123,6 +123,7 @@ class MahanaScaffolding
             // TODO: allow turning off increments, timestamps
             $migration['name'] = 'create_' . strtolower($args['name']) . '_table';
             $migration['--schema'] = $modelParser->getFields();
+            $migration['--model'] = false;
             \Artisan::call('make:migration:schema', $migration);
 
         }
