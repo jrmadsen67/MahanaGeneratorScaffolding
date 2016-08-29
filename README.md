@@ -64,6 +64,16 @@ to create a package config file called `mahana-scaffolding.php`, where you will 
 The `base_dir` refers to the directory where you put all your own files; the `files` array is a list of those files, 
 which will ALL be run (a future enhancement will allow you to specify a subset by key). 
 
+In addition, you may create your own stubs for the Mahana Generators and specify a particular stub file for each model.
+
+DO NOT RUN THIS unless you then finish configuring your own .stub files
+ 
+    php artisan vendor:publish --provider="jrmadsen67\MahanaGenerators\GeneratorsServiceProvider" --tag="mahana-generators"
+
+This will be better explained in the documentation shortly, but please understand that this is all that is required to use
+your own stubs, allowing you to do things like create a parent controller with children controllers and then actually generate
+based on those, different per item. 
+
 ####Usage
 
 More complete documentation will be provided later. For the moment, because of the limited functionality, use the 
