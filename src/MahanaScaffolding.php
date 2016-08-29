@@ -9,11 +9,11 @@ class MahanaScaffolding
 
     protected $yaml;
 
-    protected $yamlFilePath;
+    protected $filePath;
 
-    protected $yamlFileName;
+    protected $fileName;
 
-    protected $yamlContentsArray = [];
+    protected $fileContentsArray = [];
 
     protected $modelsArray = [];
 
@@ -49,10 +49,10 @@ class MahanaScaffolding
 
     public function generate()
     {
-        $this->setYamlFilePath();
+        $this->setFilePath();
 
-        collect($this->getYamlFileArray())->each(function($filename){
-            $this->setYamlFileName($filename);
+        collect($this->getFileArray())->each(function($filename){
+            $this->setFileName($filename);
             $this->parseYaml();
 
             $this->setModelsArray();
@@ -65,39 +65,39 @@ class MahanaScaffolding
 
     }
 
-    public function setYamlFilePath()
+    public function setFilePath()
     {
-        $this->yamlFilePath = base_path(config('mahana-scaffolding.base_dir'));
+        $this->filePath = base_path(config('mahana-scaffolding.base_dir'));
     }
 
-    public function getYamlFileArray(){
+    public function getFileArray(){
         return config('mahana-scaffolding.files');
     }
 
-    public function setYamlFileName($filename)
+    public function setFileName($filename)
     {
-        $this->yamlFileName = $filename;
+        $this->fileName = $filename;
     }
 
-    public function getYamlFileContents()
+    public function getFileContents()
     {
-        return file_get_contents($this->yamlFilePath . '/' . $this->yamlFileName);
+        return file_get_contents($this->filePath . '/' . $this->fileName);
     }
 
     public function parseYaml()
     {
 
-        $yamlFileContents = $this->getYamlFileContents();
+        $yamlFileContents = $this->getFileContents();
 
-        $this->yamlContentsArray = $this->yaml->parse($yamlFileContents);
+        $this->fileContentsArray = $this->yaml->parse($yamlFileContents);
 
     }
 
     public function setModelsArray()
     {
-        if (isset($this->yamlContentsArray['models']))
+        if (isset($this->fileContentsArray['models']))
         {
-            $this->modelsArray = $this->yamlContentsArray['models'];
+            $this->modelsArray = $this->fileContentsArray['models'];
         }                
     }
 
@@ -134,9 +134,9 @@ class MahanaScaffolding
 
     public function setControllersArray()
     {
-        if (isset($this->yamlContentsArray['controllers']))
+        if (isset($this->fileContentsArray['controllers']))
         {
-            $this->controllersArray = $this->yamlContentsArray['controllers'];
+            $this->controllersArray = $this->fileContentsArray['controllers'];
         }                
     }
 
@@ -159,9 +159,9 @@ class MahanaScaffolding
 
     public function setCommandsArray()
     {
-        if (isset($this->yamlContentsArray['commands']))
+        if (isset($this->fileContentsArray['commands']))
         {
-            $this->commandsArray = $this->yamlContentsArray['commands'];
+            $this->commandsArray = $this->fileContentsArray['commands'];
         }                
     }
 
@@ -178,9 +178,9 @@ class MahanaScaffolding
 
     public function setConsolesArray()
     {
-        if (isset($this->yamlContentsArray['consoles']))
+        if (isset($this->fileContentsArray['consoles']))
         {
-            $this->consolesArray = $this->yamlContentsArray['consoles'];
+            $this->consolesArray = $this->fileContentsArray['consoles'];
         }                
     }
 
@@ -197,9 +197,9 @@ class MahanaScaffolding
 
     public function setEventsArray()
     {
-        if (isset($this->yamlContentsArray['events']))
+        if (isset($this->fileContentsArray['events']))
         {
-            $this->eventsArray = $this->yamlContentsArray['events'];
+            $this->eventsArray = $this->fileContentsArray['events'];
         }                
     }
 
@@ -216,9 +216,9 @@ class MahanaScaffolding
 
     public function setJobsArray()
     {
-        if (isset($this->yamlContentsArray['jobs']))
+        if (isset($this->fileContentsArray['jobs']))
         {
-            $this->jobsArray = $this->yamlContentsArray['jobs'];
+            $this->jobsArray = $this->fileContentsArray['jobs'];
         }                
     }
 
@@ -235,9 +235,9 @@ class MahanaScaffolding
 
     public function setListenersArray()
     {
-        if (isset($this->yamlContentsArray['listeners']))
+        if (isset($this->fileContentsArray['listeners']))
         {
-            $this->listenersArray = $this->yamlContentsArray['listeners'];
+            $this->listenersArray = $this->fileContentsArray['listeners'];
         }                
     }
 
@@ -254,9 +254,9 @@ class MahanaScaffolding
 
     public function setMiddlewareArray()
     {
-        if (isset($this->yamlContentsArray['middleware']))
+        if (isset($this->fileContentsArray['middleware']))
         {
-            $this->middlewareArray = $this->yamlContentsArray['middleware'];
+            $this->middlewareArray = $this->fileContentsArray['middleware'];
         }                
     }
 
@@ -273,9 +273,9 @@ class MahanaScaffolding
 
     public function setPoliciesArray()
     {
-        if (isset($this->yamlContentsArray['policies']))
+        if (isset($this->fileContentsArray['policies']))
         {
-            $this->policiesArray = $this->yamlContentsArray['policies'];
+            $this->policiesArray = $this->fileContentsArray['policies'];
         }                
     }
 
