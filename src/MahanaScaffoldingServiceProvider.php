@@ -11,7 +11,13 @@ class MahanaScaffoldingServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
+        $source = realpath(__DIR__ . '/../config/mahana-scaffolding.php');
 
+        $this->publishes([
+            $source => config_path('mahana-scaffolding.php'),
+        ], 'mahana-scaffolding');
+
+        $this->mergeConfigFrom($source, 'mahana-scaffolding');
     }
 
     /**
