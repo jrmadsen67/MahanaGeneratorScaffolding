@@ -40,10 +40,11 @@ Afterwards, in your `AppServiceProvider`, add:
 
     public function register() {
     
-        if ($this->app->environment() == 'local') {
-            $this->app->register('jrmadsen67\MahanaGenerators\GeneratorsServiceProvider');
+		if ($this->app->environment() == 'local') {
+            $this->app->register('jrmadsen67\MahanaScaffolding\MahanaScaffoldingServiceProvider');
+			$this->app->register('jrmadsen67\MahanaGenerators\GeneratorsServiceProvider');
             $this->app->register('Laracasts\Generators\GeneratorsServiceProvider');
-        }
+		}
     }    
 
 
@@ -52,13 +53,9 @@ Afterwards, in your `AppServiceProvider`, add:
 More complete documentation will be provided later. For the moment, because of the limited functionality, use the 
 genscaffolding.yaml file in this repo and  place it in your root of a new Laravel project.
 
-A console command is coming shortly, but for testing, create a route:
+From the commandline, 
 
-use jrmadsen67\MahanaScaffolding\MahanaScaffolding;
-
-    Route::get('/', function () {
-	    (new MahanaScaffolding)->generate();	 
-	});
+    `artisan mahana-scaffolding:generate`
  
 NOTE: There is no rollback functionality, and existing files will not be overwritten. For that reason, you may find it
  easiest to first commit your basic Laravel project to git, then run the generator. This way you can clean up by simply
