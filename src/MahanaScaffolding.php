@@ -1,13 +1,15 @@
 <?php namespace jrmadsen67\MahanaScaffolding;
 
+use jrmadsen67\MahanaScaffolding\FileParsers\YamlParser;
+
 use jrmadsen67\MahanaScaffolding\Parsers\ModelParser;
-use Symfony\Component\Yaml\Parser;
+
 //use Illuminate\Filesystem\Filesystem;
 
 class MahanaScaffolding
 {
 
-    protected $yaml;
+    protected $parser;
 
     protected $filePath;
 
@@ -42,9 +44,11 @@ class MahanaScaffolding
     protected $testsArray = [];
 
 
-    public function __construct()
+    public function __construct($format = 'yaml')
     {
-        $this->yaml = new Parser();
+        if ($format == 'yaml'){
+            $this->parser = new YamlParser();
+        }
     }
 
     public function generate()
@@ -53,7 +57,7 @@ class MahanaScaffolding
 
         collect($this->getFileArray())->each(function($filename){
             $this->setFileName($filename);
-            $this->parseYaml();
+            $this->parseFile($this->getFileContents());
 
             $this->setModelsArray();
             $this->setControllersArray();
@@ -84,13 +88,9 @@ class MahanaScaffolding
         return file_get_contents($this->filePath . '/' . $this->fileName);
     }
 
-    public function parseYaml()
+    public function parseFile($fileContents)
     {
-
-        $yamlFileContents = $this->getFileContents();
-
-        $this->fileContentsArray = $this->yaml->parse($yamlFileContents);
-
+        $this->fileContentsArray = $this->parser->parseFile($fileContents);
     }
 
     public function setModelsArray()
