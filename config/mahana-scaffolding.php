@@ -1,3 +1,8 @@
 <?php
 
-return [];
+return [
+    'base_dir' => 'scaffolding',
+    'files' => [
+        'genscaffolding' => 'genscaffolding.yml'
+    ]
+];

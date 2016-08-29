@@ -42,40 +42,40 @@ class MahanaScaffolding
     protected $testsArray = [];
 
 
-    public function __construct($filepath = '', $filename = 'genscaffolding.yml')
+    public function __construct()
     {
         $this->yaml = new Parser();
-
-        $this->setYamlFilePath($filepath);
-
-        $this->setYamlFileName($filename);
     }
 
     public function generate()
     {
+        $this->setYamlFilePath();
 
-        $this->parseYaml();
+        collect($this->getYamlFileArray())->each(function($filename){
+            $this->setYamlFileName($filename);
+            $this->parseYaml();
 
-        $this->setModelsArray();
-        $this->setControllersArray();
+            $this->setModelsArray();
+            $this->setControllersArray();
 
-        $this->generateModels();
-        $this->generateControllers();
+            $this->generateModels();
+            $this->generateControllers();
+        });
+
 
     }
 
-    public function setYamlFilePath($filepath)
+    public function setYamlFilePath()
     {
-        if (empty($filepath))
-        {
-            $filepath = base_path();
-        }    
-        $this->yamlFilePath = $filepath;
+        $this->yamlFilePath = base_path(config('mahana-scaffolding.base_dir'));
+    }
+
+    public function getYamlFileArray(){
+        return config('mahana-scaffolding.files');
     }
 
     public function setYamlFileName($filename)
     {
-
         $this->yamlFileName = $filename;
     }
 
@@ -101,7 +101,7 @@ class MahanaScaffolding
         }                
     }
 
-    // NOTE: has --migration flag, but we won't use I think
+    // NOTE: has --migration flag, but we won't use
     public function generateModels()
     {
         foreach ($this->modelsArray as $item){
