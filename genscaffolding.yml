@@ -1,5 +1,7 @@
 models:
     Book:
+        stub: model_default
+        migration: true
         name: Book
         table: books
         primary_key: book_id
@@ -18,9 +20,10 @@ models:
               type: date
               dates : true
     Author:
+        migration: false
         name: Author
         table: authors
-        fields:
+        fields: 
             title:
               type: string
               fillable: false
