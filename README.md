@@ -34,7 +34,9 @@ I'm working furiously on them.
 
 ####Installation
 
-    composer require jrmadsen67/mahana-generator-scaffolding
+    composer require --dev "jrmadsen67/mahana-generator-scaffolding":"dev-master@dev"
+    
+(If this does not load jrmadsen67/mahana-generator-scaffolding, jrmadsen67/mahana-laravel5-generators & laracasts/generators, try loading them separately. Still working out a few kinks)
 
     
 Afterwards, in your `AppServiceProvider`, add:
