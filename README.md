@@ -79,7 +79,11 @@ based on those, different per item.
 ####Usage
 
 More complete documentation will be provided later. For the moment, because of the limited functionality, use the 
-genscaffolding.yaml file in this repo as a working example file.
+genscaffolding.yaml file (https://github.com/jrmadsen67/MahanaGeneratorScaffolding/blob/master/genscaffolding.yml) in this repo as a working example file.
+
+You can see from this sample file the currently available options:
+
+`stub:` is the name of the stub file you wish to use, so that each can be individually generated. Output path is a TODO. I think the other options are easy enough to work out while the docs are TODO.
 
 From the commandline, 
 
