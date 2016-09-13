@@ -34,67 +34,12 @@ I'm working furiously on them.
 
 ####Installation
 
-    composer require --dev "jrmadsen67/mahana-generator-scaffolding":"dev-master@dev"
-    
-(If this does not load jrmadsen67/mahana-generator-scaffolding, jrmadsen67/mahana-laravel5-generators & laracasts/generators, try loading them separately. Still working out a few kinks)
-
-    
-Afterwards, in your `AppServiceProvider`, add:
-
-    public function register() {
-    
-		if ($this->app->environment() == 'local') {
-            $this->app->register('jrmadsen67\MahanaScaffolding\MahanaScaffoldingServiceProvider');
-			$this->app->register('jrmadsen67\MahanaGenerators\GeneratorsServiceProvider');
-            $this->app->register('Laracasts\Generators\GeneratorsServiceProvider');
-		}
-    }    
-
-The default for your generator configuration files is /scaffolding/genscaffolding.yml. You may run:
-
-    artisan vendor:publish --provider="jrmadsen67\MahanaScaffolding\MahanaScaffoldingServiceProvider" --tag="mahana-scaffolding"
-    
-to create a package config file called `mahana-scaffolding.php`, where you will see:
-     
-         return [
-             'base_dir' => 'scaffolding',
-             'files' => [
-                 'genscaffolding' => 'genscaffolding.yml'
-             ]
-         ];
-         
-The `base_dir` refers to the directory where you put all your own files; the `files` array is a list of those files, 
-which will ALL be run (a future enhancement will allow you to specify a subset by key). 
-
-In addition, you may create your own stubs for the Mahana Generators and specify a particular stub file for each model.
-
-DO NOT RUN THIS unless you then finish configuring your own .stub files
- 
-    php artisan vendor:publish --provider="jrmadsen67\MahanaGenerators\GeneratorsServiceProvider" --tag="mahana-generators"
-
-This will be better explained in the documentation shortly, but please understand that this is all that is required to use
-your own stubs, allowing you to do things like create a parent controller with children controllers and then actually generate
-based on those, different per item. 
+https://github.com/jrmadsen67/MahanaGeneratorScaffolding/wiki/installation
 
 ####Usage
 
-More complete documentation will be provided later. For the moment, because of the limited functionality, use the 
-genscaffolding.yaml file (https://github.com/jrmadsen67/MahanaGeneratorScaffolding/blob/master/genscaffolding.yml) in this repo as a working example file.
+https://github.com/jrmadsen67/MahanaGeneratorScaffolding/wiki/usage
 
-You can see from this sample file the currently available options:
+####Example Usage
 
-`stub:` is the name of the stub file you wish to use, so that each can be individually generated. Output path is a TODO. I think the other options are easy enough to work out while the docs are TODO.
-
-From the commandline, 
-
-    `artisan mahana-scaffolding:generate`
-    
-will run the actual command to generate everything.    
- 
-NOTE: There is no rollback functionality, and existing files will not be overwritten. For that reason, you may find it
- easiest to first commit your basic Laravel project to git, then run the generator. This way you can clean up by simply
-doing a `git checkout .`   
-
-NOTE: There is a known issue with not being able to customize increment fields or turn off timestamps in the migration
-files that I simply haven't had time to look into very deeply yet. It is an issue with Jeffrey Way's Generators and may 
-require that I fork that package to fix.
+https://github.com/jrmadsen67/MahanaGeneratorScaffolding/wiki/Example-Usage
