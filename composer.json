@@ -21,7 +21,7 @@
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1",
         "jrmadsen67/mahana-laravel5-generators": "dev-master",
-        "laracasts/generators": "dev"
+        "laracasts/generators": "dev-master"
     },
     "autoload": {
         "psr-4": {
