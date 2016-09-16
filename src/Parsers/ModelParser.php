@@ -91,6 +91,18 @@ class ModelParser extends BaseParser
         $this->defaults[] = $item;
     }
 
+    function getForeign(){
+        if (empty($this->foreign)){
+            return '';
+        }
+
+        return implode(',', $this->foreign);
+    }
+
+    function setForeign($item){
+        $this->foreign[] = $item;
+    }
+
     function getFields(){
         if (empty($this->fields)){
             return '';
@@ -115,6 +127,10 @@ class ModelParser extends BaseParser
                 $this->setDefaults($key);
             }
 
+            if (!empty($field['foreign'])){
+                $this->setForeign($key);
+            }
+
             $this->fields[$key] = $this->buildFieldString($key, $field);
         });
     }
@@ -136,6 +152,10 @@ class ModelParser extends BaseParser
 
         if (!empty($field['default'])){
             $build[] = sprintf('default("%s")', $field['default']);
+        }
+
+        if (!empty($field['foreign'])){
+            $build[] = 'foreign';
         }
 
         return implode(':', $build);
