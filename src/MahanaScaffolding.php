@@ -108,8 +108,10 @@ class MahanaScaffolding
 
             $modelParser = new ModelParser($item);
 
+            $tableName = $modelParser->getTableName();
+
             $args['name'] = $modelParser->getName();
-            $args['--table'] = $modelParser->getTableName();
+            $args['--table'] = $tableName;
             $args['--primary'] = $modelParser->getPrimary();
             $args['--fillable'] = $modelParser->getFillable();
             $args['--dates'] = $modelParser->getDates();
@@ -125,8 +127,19 @@ class MahanaScaffolding
                 $migration['--schema'] = $modelParser->getFields();
                 $migration['--model'] = false;
                 \Artisan::call('make:migration:schema', $migration);
+
             }
 
+            //artisan make:migration:pivot tags posts
+            $pivots = $modelParser->getPivots();
+            if ($pivots) {
+                foreach ($pivots as $pivot){
+                    $pivot_migration['tableOne'] = $tableName;
+                    $pivot_migration['tableTwo'] = $pivot;
+                    \Artisan::call('make:migration:pivot',$pivot_migration);
+                }
+
+            }
 
         }
     }

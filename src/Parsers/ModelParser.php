@@ -30,6 +30,7 @@ class ModelParser extends BaseParser
 
         $this->setTableName($this->itemArray->get('table', ''));
         $this->setPrimary($this->itemArray->get('primary_key', ''));
+        $this->setPivots($this->itemArray->get('pivots', []));
 
         $this->parseFields($this->itemArray->get('fields', []));
 
@@ -159,5 +160,17 @@ class ModelParser extends BaseParser
         }
 
         return implode(':', $build);
+    }
+
+    function setPivots($item){
+        $this->pivots = $item;
+    }
+
+    function getPivots(){
+        if (empty($this->pivots)){
+            return [];
+        }
+
+        return array_map('trim', explode(',', $this->pivots));
     }
 }
