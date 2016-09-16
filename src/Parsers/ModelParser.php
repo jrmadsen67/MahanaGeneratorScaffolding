@@ -22,6 +22,8 @@ class ModelParser extends BaseParser
 
     public $dates;
 
+    public $defaults;
+
     function __construct($itemArray)
     {
         parent::__construct($itemArray);
@@ -77,6 +79,18 @@ class ModelParser extends BaseParser
         $this->dates[] = $item;
     }
 
+    function getDefaults(){
+        if (empty($this->defaults)){
+            return '';
+        }
+
+        return implode(',', $this->defaults);
+    }
+
+    function setDefaults($item){
+        $this->defaults[] = $item;
+    }
+
     function getFields(){
         if (empty($this->fields)){
             return '';
@@ -97,6 +111,10 @@ class ModelParser extends BaseParser
                 $this->setDates($key);
             }
 
+            if (!empty($field['default'])){
+                $this->setDefaults($key);
+            }
+
             $this->fields[$key] = $this->buildFieldString($key, $field);
         });
     }
@@ -114,6 +132,10 @@ class ModelParser extends BaseParser
 
         if (!empty($field['nullable'])){
             $build[] = 'nullable';
+        }
+
+        if (!empty($field['default'])){
+            $build[] = sprintf('default("%s")', $field['default']);
         }
 
         return implode(':', $build);
