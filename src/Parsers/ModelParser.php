@@ -152,7 +152,14 @@ class ModelParser extends BaseParser
         }
 
         if (!empty($field['default'])){
-            $build[] = sprintf('default("%s")', $field['default']);
+            //TODO: yuk! fix this
+            if (in_array($field['type'], ['string', 'date'])){
+                $build[] = sprintf('default("%s")', $field['default']);
+            }
+            else{
+                $build[] = sprintf('default(%s)', $field['default']);
+            }
+
         }
 
         if (!empty($field['foreign'])){
